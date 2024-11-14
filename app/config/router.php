@@ -17,6 +17,10 @@
             require_once './views/registro.php';
             break;
         }
+        case "inventario":{
+            require_once './views/inventario.php';
+            break;
+        }
         default:{
             require_once './views/error404.php';
             break;

@@ -60,11 +60,21 @@ const actualizar = () =>{
     }).then(respuesta => respuesta.json())
     .then(respuesta => { 
         if(respuesta[0] == 1){
-            alert(respuesta[1]);
+            swal({
+                title: "Correcto!",
+                text: respuesta[1],
+                icon: "success",
+                buttons: "Aceptar",
+            });
             consulta();
             $("#editarModal").modal('hide');
         }else{
-            alert(respuesta[1]);
+            swal({
+                title: "Error!",
+                text: respuesta[1],
+                icon: "error",
+                buttons: "Aceptar",
+            });
         }
     });
 }
@@ -81,34 +91,60 @@ const agregar = () =>{
     }).then(respuesta => respuesta.json())
     .then(respuesta => { 
         if(respuesta[0] == 1){
-            alert(respuesta[1]);
+            swal({
+                title: "Correcto!",
+                text: respuesta[1],
+                icon: "success",
+                buttons: "Aceptar",
+            });
             consulta();
             $("#agregarModal").modal('hide');
         }else{
-            alert(respuesta[1]);
+            swal({
+                title: "Error!",
+                text: respuesta[1],
+                icon: "error",
+                buttons: "Aceptar",
+            });
         }
     });
 }
 
 const eliminar = (id) =>{
-    let accion = confirm("Quieres eliminar el producto?");
-    if(accion){
-        let data = new FormData();
-        data.append("id_producto",id);
-        data.append("metodo","eliminar_datos");
-        fetch("./app/controller/Productos.php",{
-            method:"POST",
-            body:data
-        }).then(respuesta => respuesta.json())
-        .then(respuesta => { 
-            if(respuesta[0] == 1){
-                alert(respuesta[1]);
-                consulta();
-            }else{
-                alert(respuesta[0]);
-            }
-        });
-    }
+    swal({
+        title: "Advertencia!",
+        text: "Quieres eliminar el producto?",
+        icon: "warning",
+        buttons: ["Cancelar","Aceptar"],
+    }).then((opcion) => {
+        if(opcion){
+            let data = new FormData();
+            data.append("id_producto",id);
+            data.append("metodo","eliminar_datos");
+            fetch("./app/controller/Productos.php",{
+                method:"POST",
+                body:data
+            }).then(respuesta => respuesta.json())
+            .then(respuesta => { 
+                if(respuesta[0] == 1){
+                    swal({
+                        title: "Correcto!",
+                        text: respuesta[1],
+                        icon: "success",
+                        buttons: "Aceptar",
+                    });
+                    consulta();
+                }else{
+                    swal({
+                        title: "Error!",
+                        text: respuesta[1],
+                        icon: "error",
+                        buttons: "Aceptar",
+                    });
+                }
+            });
+        }
+    });
 }
 
 $('#btn_actualizar').on('click',() => {

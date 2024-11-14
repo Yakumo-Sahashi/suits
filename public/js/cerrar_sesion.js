@@ -8,8 +8,19 @@ const cerrar_sesion = () =>{
     })
     .then(respuesta => respuesta.json())
     .then(respuesta => {
-        alert(respuesta[1]);
-        window.location="login";
+        swal({
+            title: "Correcto!",
+            text: respuesta[1],
+            icon: "success",
+            buttons: "Aceptar",
+            closeOnClickOutside: false,
+            closeOnEsc: false,
+            value: true,
+            buttons: false,
+            timer: 1500
+        }).then(() => {
+            window.location="login";
+        });
     });
 }
 

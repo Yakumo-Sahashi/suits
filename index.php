@@ -21,6 +21,7 @@
 </head>
 
 <body>
+    <?php require_once './views/components/navbar.php';?>  
     <?php require_once './app/config/router.php';?>  
     <script src="./public/js/cerrar_sesion.js"></script>
     <script src="./public/js/main.js"></script>
